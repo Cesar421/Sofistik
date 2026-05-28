@@ -1,0 +1,38 @@
+   *** Start: Program Calculation - Version 2024-10.0.1119
+   *** Start: Program ase :  Linear Analysis
+   
+   SOFiSTiK 2024-10.0.1119    ASE   - ADVANCED SOLUTION ENGINE
+   Output on file pile.plb
+   Project data base pile.cdb             -    82. access
+   load case     1
+   
+   Parameter of System of Equation   3
+   (Sparse Direct Solver)
+   Number of unknowns               54
+   Total entries                   252
+   Total entries after fill        306
+   +++++ warning no.    89 in program TVNON
+   Circular values for pile-bedding only applied for nonlinear analysis
+   TIME NEEDED         1, TOTAL         1
+   TIME NEEDED         0, TOTAL         1
+   DATE       2026-05-28, 17:27:13
+   
+   
+   
+    +++++    0 errors and    1 warnings +++++
+   *** Stop : Program ase
+   *** Start: Program wing :  Graphical Output
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Output on file pile.plb
+   graphics picture layer : title
+          1       1     1 : All loads (in components)  LC:          1
+          1       2     1 : Nodes , Support force vector  LC:          1
+          2       1     1 : deformed Structure  (Nodal displacement + beam displacement + cable displacement )
+          2       2     1 : Beam Elements , Bending moment My  LC:          1
+          3       1     1 : Beam Elements , Shear force Vz  LC:          1
+          3       2     1 : Beam Elements , Normal force Nx  LC:          1
+   TIME NEEDED         0, TOTAL         0
+   DATE       2026-05-28, 17:27:14
+   *** Stop : Program wing
+   *** End of Calculation!
