@@ -1,0 +1,329 @@
++PROG WING
+
+HEAD 'Parameter: Gruppen, Maﬂe'
+
+#DEFINE WG_GRP
+
+GRP 1,2,3,5                                             $ [-] Gruppen
+
+#ENDDEF
+
+STO#U1_Nx  35.0                                         $ [kN]  max. Normalkraft Nx
+STO#U2_Nx  45.0                                         $ [kN]  min. Normalkraft Nx
+STO#U1_Vz  45.0                                         $ [kN]  max. Querkraft Vz
+STO#U2_Vz  45.0                                         $ [kN]  min. Querkraft Vz
+STO#U1_Vy  20.0                                         $ [kN]  max. Querkraft Vy
+STO#U2_Vy  20.0                                         $ [kN]  min. Querkraft Vy
+STO#U1_My 130.0                                         $ [kNm] max. Moment My
+STO#U2_My 130.0                                         $ [kNm] min. Moment My
+STO#U1_Mz  75.0                                         $ [kNm] max. Moment Mz
+STO#U2_Mz  75.0                                         $ [kNm] min. Moment Mz
+STO#U1_Mt  45.0                                         $ [kNm] max. Moment Mt
+STO#U2_Mt  45.0                                         $ [kNm] min. Moment Mt
+
+END
+
++PROG WING
+
+HEAD 'Torsionsbalken: Normalkraft Nx'
+
+STO#FR #FR+0.5                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+CTRL OPT EMPT VAL EXTR
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0            $ [-] Ansicht
+SCHH H6 #H6
+
+#INCLUDE WG_GRP
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Normalkraft Nx'
+
+LC   NO #LS1+1
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+BEAM TYPE N UNIT #U1_Nx SCHH YES
+
+$LC   NO #LS2+1
+$AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+$BEAM TYPE N UNIT LAST SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Normalkraft Nx'
+
+LC   NO #LS1+11
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+BEAM TYPE N UNIT #U2_Nx SCHH YES
+
+$LC   NO #LS2+11
+$AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+$BEAM TYPE N UNIT LAST SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Torsionsbalken: Querkraft Vz'
+
+STO#FR #FR+0.5                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+CTRL OPT EMPT VAL EXTR
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0            $ [-] Ansicht
+SCHH H6 #H6
+
+DSGN TYPE LINE DTYP -EP                                 $ [-] Richtung der Darstellung
+
+#INCLUDE WG_GRP
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Querkraft Vz'
+
+LC   NO #LS1+2
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+BEAM TYPE VZ UNIT #U1_Vz SCHH YES
+
+$LC   NO #LS2+2
+$AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+$BEAM TYPE VZ UNIT LAST SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Querkraft Vz'
+
+LC   NO #LS1+12
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+BEAM TYPE VZ UNIT #U2_Vz SCHH YES
+
+$LC   NO #LS2+12
+$AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+$BEAM TYPE VZ UNIT LAST SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Torsionsbalken: Querkraft Vy'
+
+STO#FR #FR+0.5                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+CTRL OPT EMPT VAL EXTR
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0            $ [-] Ansicht
+SCHH H6 #H6
+
+DSGN TYPE LINE DTYP -EP                                 $ [-] Richtung der Darstellung
+
+#INCLUDE WG_GRP
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Querkraft Vy'
+
+LC   NO #LS1+3
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+BEAM TYPE VY UNIT #U1_Vy SCHH YES
+
+$LC   NO #LS2+3
+$AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+$BEAM TYPE VY UNIT LAST SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Querkraft Vy'
+
+LC   NO #LS1+13
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+BEAM TYPE VY UNIT #U2_Vy SCHH YES
+
+$LC   NO #LS2+13
+$AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+$BEAM TYPE VY UNIT LAST SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Torsionsbalken: Moment My'
+
+STO#FR #FR+0.5                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+CTRL OPT EMPT VAL EXTR
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0            $ [-] Ansicht
+SCHH H6 #H6
+
+DSGN TYPE LINE DTYP -EP                                 $ [-] Richtung der Darstellung
+
+#INCLUDE WG_GRP
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Moment My'
+
+LC   NO #LS1+4
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+BEAM TYPE MY UNIT #U1_My SCHH YES
+
+$LC   NO #LS2+4
+$AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+$BEAM TYPE MY UNIT LAST SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Moment My'
+
+LC   NO #LS1+14
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+BEAM TYPE MY UNIT #U2_My SCHH YES
+
+$LC   NO #LS2+14
+$AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+$BEAM TYPE MY UNIT LAST SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Torsionsbalken: Moment Mz'
+
+STO#FR #FR+0.5                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+CTRL OPT EMPT VAL EXTR
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0            $ [-] Ansicht
+SCHH H6 #H6
+
+DSGN TYPE LINE DTYP -EP                                 $ [-] Richtung der Darstellung
+
+#INCLUDE WG_GRP
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Moment Mz'
+
+LC   NO #LS1+5
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+BEAM TYPE MZ UNIT #U1_Mz SCHH YES
+
+$LC   NO #LS2+5
+$AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+$BEAM TYPE MZ UNIT LAST SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Moment Mz'
+
+LC   NO #LS1+15
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+BEAM TYPE MZ UNIT #U2_Mz SCHH YES
+
+$LC   NO #LS2+15
+$AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+$BEAM TYPE MZ UNIT LAST SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Torsionsbalken: Moment MT'
+
+STO#FR #FR+0.5                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+CTRL OPT EMPT VAL EXTR
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0            $ [-] Ansicht
+SCHH H6 #H6
+
+DSGN TYPE LINE DTYP -EP                                 $ [-] Richtung der Darstellung
+
+#INCLUDE WG_GRP
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Moment Mt'
+
+LC   NO #LS1+6
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+BEAM TYPE MT UNIT #U1_Mt SCHH YES
+
+$LC   NO #LS2+6
+$AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100            $ [-] Lage des Fensters
+
+$BEAM TYPE MT UNIT LAST SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Moment Mt'
+
+LC   NO #LS1+16
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+BEAM TYPE MT UNIT #U2_Mt SCHH YES
+
+$LC   NO #LS2+16
+$AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50              $ [-] Lage des Fensters
+
+$BEAM TYPE MT UNIT LAST SCHH YES
+
+END
+

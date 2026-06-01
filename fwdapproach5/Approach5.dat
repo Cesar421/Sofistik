@@ -1,0 +1,1451 @@
+!#!Chapter Modell
++PROG AQUA urs:1
+
+HEAD 'Torsionsbalken km 7,7+64'
+
+HEAD 'Materialien'
+
+STO#LN 0                                                $ [-] Sprache ; 0 = Deutsch
+STO#UO 0                                                $ [-] Einheiten
+
+PAGE LANO  UNIO
+     #LN   #UO
+
+ECHO MAT
+
+NORM DIN EN1993-2005 CAT D
+
+$ Stahlbau:
+
+STEE NO  TYPE  CLAS  SCM  TITL
+     31     S  235   1.0  'S 235'                       $ [-] Teilsicherheitsbeiwert Ɣ_M0 = 1,0
+
+END
+
++PROG AQUA urs:2
+
+HEAD 'Querschnitte'
+
+ECHO SECT
+
+$ Torsionsbalken:
+
+LET#Qn   11                             $ [-] Querschnittsnummer
+LET#Mn   31                             $ [-] Materialnummer
+LET#h    500.0                          $ [mm] Höhe
+LET#b    300.0                          $ [mm] Breite
+LET#t    12.5                           $ [mm] Dicke
+
+PROF NO   TYPE  Z1   Z2  Z3  MNO  DTYP
+     #Qn  SH    #h   #b  #t  #Mn  S
+
+$ Gründungspfahl:
+
+LET#Qn   21                             $ [-] Querschnittsnummer
+LET#Mn   31                             $ [-] Materialnummer
+STO#D_Sr 610.0E-3                       $ [m] Durchmesser Stahlrohrs
+LET#t_Sr 6.3E-3                         $ [m] Dicke Stahlrohrs
+LET#t_kr (3.25E-3)/2                    $ [m] Dickenverlust infolge Korrosion ; DIN EN 1993-5:2010-12, 4.4 (2)
+LET#t    #t_Sr-#t_kr                    $ [m] effektive Dicke
+
+TUBE NO   D         T      MNO  TITL
+     #Qn  #D_Sr[m]  #t[m]  #Mn  'Gründungspfahl'
+
+$ Pfosten:
+
+LET#Qn   31                             $ [-] Querschnittsnummer
+LET#Mn   31                             $ [-] Materialnummer
+
+PROF NO   TYPE  Z1   MNO  DTYP
+     #Qn  HEB   160  #Mn  S
+
+END
+
++PROG SOFIMSHC urs:3
+
+HEAD 'Torsionsbalken km 7,7+64'
+
+HEAD 'FEM'
+
+LET#GDIV 10000                  $ [-] Gruppendivisor
+
+SYST 3D #GDIV NEGZ
+
+CTRL MESH 2
+
+CTRL HMIN 0.20
+
+#DEFINE Gp
+
+LET#Qn 21                       $ [-] Querschnittsnummer
+
+LET#NO #Ach*1000
+
+SPT #NO+100  Z  0.00  Y #Y  X 0.0  ;  SPTP REF #NO+000  TYPE KF  GRP 5
+SPT #NO+110  Z -1.00  Y #Y  X 0.0
+SPT #NO+120  Z -4.00  Y #Y  X 0.0
+SPT #NO+130  Z -4.25  Y #Y  X 0.0
+SPT #NO+140  Z -6.65  Y #Y  X 0.0
+SPT #NO+150  Z -7.00  Y #Y  X 0.0  FIX PZ
+
+SLN #NO+100  #NO+100  #NO+110  SNO #Qn  GRP 2
+
+SLN #NO+110  #NO+110  #NO+120  SNO #Qn  GRP 2  ;  SLNS DRX +1  CA #K_st1  BFIX #D_Sr  FCTA 0.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRY +1  CA #K_st1  BFIX #D_Sr  FCTA 0.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRX +1  CA #K_dy1  BFIX #D_Sr  FCTA 0.0  FCTE 1.0  GRP 12  REFT >FIX
+                                                  SLNS DRY +1  CA #K_dy1  BFIX #D_Sr  FCTA 0.0  FCTE 1.0  GRP 12  REFT >FIX
+
+SLN #NO+120  #NO+120  #NO+130  SNO #Qn  GRP 2  ;  SLNS DRX +1  CA #K_st1  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRY +1  CA #K_st1  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRX +1  CA #K_dy1  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 12  REFT >FIX
+                                                  SLNS DRY +1  CA #K_dy1  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 12  REFT >FIX
+
+SLN #NO+130  #NO+130  #NO+140  SNO #Qn  GRP 2  ;  SLNS DRX +1  CA #K_st2  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRY +1  CA #K_st2  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRX +1  CA #K_dy2  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 12  REFT >FIX
+                                                  SLNS DRY +1  CA #K_dy2  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 12  REFT >FIX
+
+SLN #NO+140  #NO+140  #NO+150  SNO #Qn  GRP 2  ;  SLNS DRX +1  CA #K_st3  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRY +1  CA #K_st3  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 11  REFT >FIX
+                                                  SLNS DRX +1  CA #K_dy3  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 12  REFT >FIX
+                                                  SLNS DRY +1  CA #K_dy3  BFIX #D_Sr  FCTA 1.0  FCTE 1.0  GRP 12  REFT >FIX
+
+#ENDDEF
+
+#DEFINE Pf
+
+LET#Qn 31                       $ [-] Querschnittsnummer
+
+LET#NO #Ach*1000
+
+SPT #NO+000  Z 0.25  Y #Y  X 0.0
+SPT #NO+200  Z 0.50  Y #Y  X 0.0  ;  SPTP REF #NO+000  TYPE KF  GRP 5
+SPT #NO+210  Z 2.50  Y #Y  X 0.0
+SPT #NO+220  Z 4.50  Y #Y  X 0.0
+
+SLN #NO+200  #NO+200  #NO+210  SNO #Qn  GRP 3
+
+SLN #NO+210  #NO+210  #NO+220  SNO #Qn  GRP 3
+
+#ENDDEF
+
+#DEFINE Tb
+
+LET#Qn 11                       $ [-] Querschnittsnummer
+
+LET#NO1 #Ach1*1000
+LET#NO2 #Ach2*1000
+
+SLN #NO1+000  #NO1+000  #NO2+000  SNO #Qn  GRP 1
+
+#ENDDEF
+
+!*!Label Gründungspfahl und Pfosten
+
+LET#E_st1  6.0E3                $ [kN/m²] statisches Steifemodul Erdschicht 1
+LET#E_st2 10.0E3                $ [kN/m²] statisches Steifemodul Erdschicht 2
+LET#E_st3 15.0E3                $ [kN/m²] statisches Steifemodul Erdschicht 3
+
+LET#E_dy1  60.0E3               $ [kN/m²] dynamisches Steifemodul Erdschicht 1
+LET#E_dy2  80.0E3               $ [kN/m²] dynamisches Steifemodul Erdschicht 2
+LET#E_dy3 100.0E3               $ [kN/m²] dynamisches Steifemodul Erdschicht 3
+
+LET#K_st1 #E_st1/#D_Sr          $ [kN/m³] statisches Bettungsmodul Erdschicht 1
+LET#K_st2 #E_st2/#D_Sr          $ [kN/m³] statisches Bettungsmodul Erdschicht 2
+LET#K_st3 #E_st3/#D_Sr          $ [kN/m³] statisches Bettungsmodul Erdschicht 3
+
+LET#K_dy1 #E_dy1/#D_Sr          $ [kN/m³] dynamisches Bettungsmodul Erdschicht 1
+LET#K_dy2 #E_dy2/#D_Sr          $ [kN/m³] dynamisches Bettungsmodul Erdschicht 2
+LET#K_dy3 #E_dy3/#D_Sr          $ [kN/m³] dynamisches Bettungsmodul Erdschicht 3
+
+LET#Ach 1                       $ [-] Achse
+LET#Y   0.0                     $ [m]
+
+#INCLUDE Pf
+#INCLUDE Gp
+
+LET#Ach 2                       $ [-] Achse
+LET#Y   2.5                     $ [m]
+
+#INCLUDE Pf
+
+LET#Ach 3                       $ [-] Achse
+LET#Y   5.0                     $ [m]
+
+#INCLUDE Pf
+
+LET#Ach 4                       $ [-] Achse
+LET#Y   7.5                     $ [m]
+
+#INCLUDE Pf
+
+LET#Ach 5                       $ [-] Achse
+LET#Y   10.0                    $ [m]
+
+#INCLUDE Pf
+
+LET#Ach 6                       $ [-] Achse
+LET#Y   12.5                    $ [m]
+
+#INCLUDE Pf
+#INCLUDE Gp
+
+!*!Label Torsionsbalken
+
+LET#Ach1 1                      $ [-] Achse 1
+LET#Ach2 #Ach1+1                $ [-] Achse 2
+
+LET#Lp 5                        $ [-] Anzahl an Torsionsbalken (zwischen Pfosten)
+
+LOOP #Lp
+
+        #INCLUDE Tb
+
+        LET#Ach1 #Ach1+1         $ [-] Achse 1
+        LET#Ach2 #Ach1+1         $ [-] Achse 2
+
+ENDLOOP
+
+END
+
+!#!Chapter Eigenfrequenzen
++PROG ASE urs:4
+
+HEAD 'Analyse'
+
+STO#w_W  0.25                   $ [kN/m²] Wichte Wand
+LET#b_W  2.50                   $ [m] Breite Wand
+STO#h_W  4.00                   $ [m] Höhe Wand
+
+LET#m_W (#w_W/9.81)*#b_W*#h_W   $ [t] Masse Wand
+
+LET#Lp 6                        $ [-] Anzahl an Pfosten
+
+LET#Ach 1                       $ [-] Achse
+
+LOOP #Lp
+
+        LET#NO #Ach*1000
+
+        MASS NO       MX
+             #NO+210  #m_W
+
+        LET#Ach #Ach+1          $ [-] Achse
+
+ENDLOOP
+
+STO#m_Wlks (#w_W/9.81)*#h_W*1.25        $ [t] Masse Wand Links
+STO#m_Wrch (#w_W/9.81)*#h_W*1.25        $ [t] Masse Wand Rechts
+
+STO#m_Slks (25.0/9.81)*0.16*1.50*1.25   $ [t] Masse Sockel Links
+STO#m_Srch (25.0/9.81)*0.16*1.50*1.25   $ [t] Masse Sockel Rechts
+
+LET#Ach 1                               $ [-] Achse
+
+        LET#NO #Ach*1000
+
+        MASS NO       MX
+             #NO+210  #m_Wlks-(#m_W/2)
+             #NO+000  #m_Slks
+
+LET#Ach 6                               $ [-] Achse
+
+        LET#NO #Ach*1000
+
+        MASS NO       MX
+             #NO+210  #m_Wrch-(#m_W/2)
+             #NO+000  #m_Srch
+
+LET#dE 3                        $ [-] dynamische Eigenwerte
+
+GRP 1,2,3,5,12                  $ [-] Gruppen (dynamische Steifemodule)
+
+EIGE NEIG  LC  ETYP=LANC
+     #dE   1
+
+END
+
+!#!Chapter ständige Einwirkungen
++PROG SOFILOAD urs:5
+
+HEAD 'Einwirkungen'
+
+ECHO ACT
+
+ACT TYPE GAMU GAMF PSI0 PSI1 PSI2 SUP  TITL
+    G_1  1.35 1.00 1.00 1.00 1.00 PERM 'Eingengewicht'
+    G_2  1.35 1.00 1.00 1.00 1.00 PERM 'Ständige Lasten'
+    ZUG  1.30 0.00 0.80 0.70 0.50 EXCL 'Druck-Sog'
+    W    1.50 0.00 0.60 0.20 0.00 EXCL 'Wind'
+
+ACT TYPE GAMU GAMF PSI0 PSI1 PSI2 SUP  TITL
+    GZT  1.00 0.00 1.00 1.00 1.00 EXEX 'GZT'
+    ERM  1.00 0.00 1.00 1.00 1.00 EXEX 'Ermüdung'
+
+END
+
++PROG SOFILOAD urs:6
+
+HEAD 'ständige Lasten (G_k,2)'
+
+LET#G2_Wand #w_W*#h_W                   $ [kN/m] Gewicht Wand
+
+LET#G2_Wlks #m_Wlks*9.81        $ [kN] Gewicht Wand Links
+LET#G2_Wrch #m_Wrch*9.81        $ [kN] Gewicht Wand Rechts
+
+LET#G2_Slks #m_Slks*9.81        $ [kN] Gewicht Sockel Links
+LET#G2_Srch #m_Srch*9.81        $ [kN] Gewicht Sockel Rechts
+
+LC 200 G_2 TITL 'G_k,2'
+BEAM TO    PA        FROM=GRP
+     1     #G2_Wand
+
+LET#Ach 1                       $ [-] Achse
+
+        LET#NO #Ach*1000
+
+        NODE NO       P1
+             #NO+210  #G2_Wlks
+             #NO+000  #G2_Slks
+
+LET#Ach 6                       $ [-] Achse
+
+        LET#NO #Ach*1000
+
+        NODE NO       P1
+             #NO+210  #G2_Wrch
+             #NO+000  #G2_Srch
+
+END
+
++PROG CSM urs:7
+
+HEAD 'Bauzustände'
+
+CS NO   TYPE  TITL
+   100  G_1   'G_k,1'
+   200  G_2   'G_k,2'
+
+GRP NO  ICS1=100
+    1                                   $ [-] Torsionsbalken
+    2                                   $ [-] Gründungspfähle
+    3                                   $ [-] Pfosten
+    5                                   $ [-] kinetische Kopplungen
+
+GRP NO  PHIF  ICS1=100
+    11  1.0                             $ [-] Bettung (statische Steifemodule)
+
+LC NO   TYPE  ICS1
+   200  G_2   200
+
+END
+
++apply $(NAME)_csm.dat
+
++PROG TEMPLATE urs:8
+END
+
+!#!Chapter veränderliche Einwirkungen
++PROG SOFILOAD urs:9
+
+HEAD 'Druck-Sog (Q_k,1)'
+
+!*!Label Blocks
+
+#DEFINE qD_vor
+
+AREA Z1      Z2      Z3      Z4       P1       P2       P3       P4      Y1=#Y1 Y2=#Y2 Y3=#Y2 Y4=#Y1 X1=0.0 X2=0.0 X3=0.0 X4=0.0 NO=#Ach1 REF=LAR TYPE=PXX
+     #zh_10  #zh_10  #zh_09  #zh_09  +#qD_10  +#qD_10  +#qD_09  +#qD_09
+     #zh_09  #zh_09  #zh_08  #zh_08  +#qD_09  +#qD_09  +#qD_08  +#qD_08
+     #zh_08  #zh_08  #zh_07  #zh_07  +#qD_08  +#qD_08  +#qD_07  +#qD_07
+     #zh_07  #zh_07  #zh_06  #zh_06  +#qD_07  +#qD_07  +#qD_06  +#qD_06
+     #zh_06  #zh_06  #zh_05  #zh_05  +#qD_06  +#qD_06  +#qD_05  +#qD_05
+     #zh_05  #zh_05  #zh_04  #zh_04  +#qD_05  +#qD_05  +#qD_04  +#qD_04
+     #zh_04  #zh_04  #zh_03  #zh_03  +#qD_04  +#qD_04  +#qD_03  +#qD_03
+     #zh_03  #zh_03  #zh_02  #zh_02  +#qD_03  +#qD_03  +#qD_02  +#qD_02
+     #zh_02  #zh_02  #zh_01  #zh_01  +#qD_02  +#qD_02  +#qD_01  +#qD_01
+     #zh_01  #zh_01  #zh_00  #zh_00  +#qD_01  +#qD_01  +#qD_00  +#qD_00
+
+#ENDDEF
+
+#DEFINE qD_hin
+
+AREA Z1      Z2      Z3      Z4       P1       P2       P3       P4      Y1=#Y1 Y2=#Y2 Y3=#Y2 Y4=#Y1 X1=0.0 X2=0.0 X3=0.0 X4=0.0 NO=#Ach1 REF=LAR TYPE=PXX
+     #zh_10  #zh_10  #zh_09  #zh_09  -#qD_10  -#qD_10  -#qD_09  -#qD_09
+     #zh_09  #zh_09  #zh_08  #zh_08  -#qD_09  -#qD_09  -#qD_08  -#qD_08
+     #zh_08  #zh_08  #zh_07  #zh_07  -#qD_08  -#qD_08  -#qD_07  -#qD_07
+     #zh_07  #zh_07  #zh_06  #zh_06  -#qD_07  -#qD_07  -#qD_06  -#qD_06
+     #zh_06  #zh_06  #zh_05  #zh_05  -#qD_06  -#qD_06  -#qD_05  -#qD_05
+     #zh_05  #zh_05  #zh_04  #zh_04  -#qD_05  -#qD_05  -#qD_04  -#qD_04
+     #zh_04  #zh_04  #zh_03  #zh_03  -#qD_04  -#qD_04  -#qD_03  -#qD_03
+     #zh_03  #zh_03  #zh_02  #zh_02  -#qD_03  -#qD_03  -#qD_02  -#qD_02
+     #zh_02  #zh_02  #zh_01  #zh_01  -#qD_02  -#qD_02  -#qD_01  -#qD_01
+     #zh_01  #zh_01  #zh_00  #zh_00  -#qD_01  -#qD_01  -#qD_00  -#qD_00
+
+#ENDDEF
+
+#DEFINE qD_Pf_vor
+
+LINE Z1      Z2       P1            P2          Y1=#Y Y2=#Y X1=0.0 X2=0.0 TYPE=PXX REF=SLN
+     #zh_10  #zh_09  +(#qD_10*#b)  +(#qD_09*#b)
+     #zh_09  #zh_08  +(#qD_09*#b)  +(#qD_08*#b)
+     #zh_08  #zh_07  +(#qD_08*#b)  +(#qD_07*#b)
+     #zh_07  #zh_06  +(#qD_07*#b)  +(#qD_06*#b)
+     #zh_06  #zh_05  +(#qD_06*#b)  +(#qD_05*#b)
+     #zh_05  #zh_04  +(#qD_05*#b)  +(#qD_04*#b)
+     #zh_04  #zh_03  +(#qD_04*#b)  +(#qD_03*#b)
+     #zh_03  #zh_02  +(#qD_03*#b)  +(#qD_02*#b)
+     #zh_02  #zh_01  +(#qD_02*#b)  +(#qD_01*#b)
+     #zh_01  #zh_00  +(#qD_01*#b)  +(#qD_00*#b)
+
+#ENDDEF
+
+#DEFINE qD_Pf_hin
+
+LINE Z1      Z2       P1            P2          Y1=#Y Y2=#Y X1=0.0 X2=0.0 TYPE=PXX REF=SLN
+     #zh_10  #zh_09  -(#qD_10*#b)  -(#qD_09*#b)
+     #zh_09  #zh_08  -(#qD_09*#b)  -(#qD_08*#b)
+     #zh_08  #zh_07  -(#qD_08*#b)  -(#qD_07*#b)
+     #zh_07  #zh_06  -(#qD_07*#b)  -(#qD_06*#b)
+     #zh_06  #zh_05  -(#qD_06*#b)  -(#qD_05*#b)
+     #zh_05  #zh_04  -(#qD_05*#b)  -(#qD_04*#b)
+     #zh_04  #zh_03  -(#qD_04*#b)  -(#qD_03*#b)
+     #zh_03  #zh_02  -(#qD_03*#b)  -(#qD_02*#b)
+     #zh_02  #zh_01  -(#qD_02*#b)  -(#qD_01*#b)
+     #zh_01  #zh_00  -(#qD_01*#b)  -(#qD_00*#b)
+
+#ENDDEF
+
+!*!Label LARs
+
+LET#Ach1 1                      $ [-] Achse 1
+LET#Ach2 #Ach1+1                $ [-] Achse 2
+
+LET#Lp 5                        $ [-] Anzahl an Torsionsbalken (zwischen Pfosten)
+
+LOOP #Lp
+
+        LET#NO1 #Ach1*1000
+        LET#NO2 #Ach2*1000
+
+        LAR NO     Y1        Y2        Y3        Y4        X1=GPT X2=GPT X3=GPT X4=GPT
+            #Ach1  #NO1+200  #NO1+220  #NO2+220  #NO2+200
+
+        LET#Ach1 #Ach1+1        $ [-] Achse 1
+        LET#Ach2 #Ach1+1        $ [-] Achse 2
+
+ENDLOOP
+
+!*!Label Parameter
+
+LET#z_OW 4.5                    $ [m] Z OK Wand
+LET#z_SO 1.0                    $ [m] Z SO
+
+LET#q_DS 0.216                  $ [kN/m²] q_DS ohne phi_H!!!
+
+LET#ph_10 0.60                  $ [-] phi_H (z/h = 1,0 ; h = 3,0)
+LET#ph_09 0.68                  $ [-] phi_H (z/h = 0,9 ; h = 3,0)
+LET#ph_08 0.74                  $ [-] phi_H (z/h = 0,8 ; h = 3,0)
+LET#ph_07 0.80                  $ [-] phi_H (z/h = 0,7 ; h = 3,0)
+LET#ph_06 0.86                  $ [-] phi_H (z/h = 0,6 ; h = 3,0)
+LET#ph_05 0.90                  $ [-] phi_H (z/h = 0,5 ; h = 3,0)
+LET#ph_04 0.94                  $ [-] phi_H (z/h = 0,4 ; h = 3,0)
+LET#ph_03 0.96                  $ [-] phi_H (z/h = 0,3 ; h = 3,0)
+LET#ph_02 0.98                  $ [-] phi_H (z/h = 0,2 ; h = 3,0)
+LET#ph_01 1.00                  $ [-] phi_H (z/h = 0,1 ; h = 3,0)
+LET#ph_00 1.00                  $ [-] phi_H (z/h = 0,0 ; h = 3,0)
+
+LET#Dz #z_OW-#z_SO              $ [m] Delta Z
+
+LET#zh_10 (1.0*#Dz)+#z_SO
+LET#zh_09 (0.9*#Dz)+#z_SO
+LET#zh_08 (0.8*#Dz)+#z_SO
+LET#zh_07 (0.7*#Dz)+#z_SO
+LET#zh_06 (0.6*#Dz)+#z_SO
+LET#zh_05 (0.5*#Dz)+#z_SO
+LET#zh_04 (0.4*#Dz)+#z_SO
+LET#zh_03 (0.3*#Dz)+#z_SO
+LET#zh_02 (0.2*#Dz)+#z_SO
+LET#zh_01 (0.1*#Dz)+#z_SO
+LET#zh_00 (0.0*#Dz)+#z_SO
+
+LET#qD_10 #q_DS*#ph_10
+LET#qD_09 #q_DS*#ph_09
+LET#qD_08 #q_DS*#ph_08
+LET#qD_07 #q_DS*#ph_07
+LET#qD_06 #q_DS*#ph_06
+LET#qD_05 #q_DS*#ph_05
+LET#qD_04 #q_DS*#ph_04
+LET#qD_03 #q_DS*#ph_03
+LET#qD_02 #q_DS*#ph_02
+LET#qD_01 #q_DS*#ph_01
+LET#qD_00 #q_DS*#ph_00
+
+!*!Label Lastfälle
+
+LC 301 ZUG TITL 'Q_k,1'
+
+LET#Y   0.0                     $ [m] Y Achse
+LET#b   1.25                    $ [m] Breite der daneben liegenden Fläche
+
+#INCLUDE qD_Pf_vor
+
+LET#Ach1  1                     $ [-] Achse 1
+LET#Y1  0.0                     $ [m] Y Achse 1
+LET#Y2  2.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LC 302 ZUG TITL 'Q_k,1'
+
+LET#Y   0.0                     $ [m] Y Achse
+LET#b   1.25                    $ [m] Breite der daneben liegenden Fläche
+
+#INCLUDE qD_Pf_hin
+
+LET#Ach1  1                     $ [-] Achse 1
+LET#Y1  0.0                     $ [m] Y Achse 1
+LET#Y2  2.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LET#Ach1  2                     $ [-] Achse 1
+LET#Y1  2.5                     $ [m] Y Achse 1
+LET#Y2  5.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LC 303 ZUG TITL 'Q_k,1'
+
+LET#Y   0.0                     $ [m] Y Achse
+LET#b   1.25                    $ [m] Breite der daneben liegenden Fläche
+
+#INCLUDE qD_Pf_hin
+
+LET#Ach1  1                     $ [-] Achse 1
+LET#Y1  0.0                     $ [m] Y Achse 1
+LET#Y2  2.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  2                     $ [-] Achse 1
+LET#Y1  2.5                     $ [m] Y Achse 1
+LET#Y2  5.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LET#Ach1  3                     $ [-] Achse 1
+LET#Y1  5.0                     $ [m] Y Achse 1
+LET#Y2  7.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LC 304 ZUG TITL 'Q_k,1'
+
+LET#Ach1  1                     $ [-] Achse 1
+LET#Y1  0.0                     $ [m] Y Achse 1
+LET#Y2  2.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  2                     $ [-] Achse 1
+LET#Y1  2.5                     $ [m] Y Achse 1
+LET#Y2  5.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  3                     $ [-] Achse 1
+LET#Y1  5.0                     $ [m] Y Achse 1
+LET#Y2  7.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LET#Ach1  4                     $ [-] Achse 1
+LET#Y1  7.5                     $ [m] Y Achse 1
+LET#Y2 10.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LC 305 ZUG TITL 'Q_k,1'
+
+LET#Ach1  2                     $ [-] Achse 1
+LET#Y1  2.5                     $ [m] Y Achse 1
+LET#Y2  5.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  3                     $ [-] Achse 1
+LET#Y1  5.0                     $ [m] Y Achse 1
+LET#Y2  7.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  4                     $ [-] Achse 1
+LET#Y1  7.5                     $ [m] Y Achse 1
+LET#Y2 10.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LET#Ach1  5                     $ [-] Achse 1
+LET#Y1 10.0                     $ [m] Y Achse 1
+LET#Y2 12.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LC 306 ZUG TITL 'Q_k,1'
+
+LET#Ach1  3                     $ [-] Achse 1
+LET#Y1  5.0                     $ [m] Y Achse 1
+LET#Y2  7.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  4                     $ [-] Achse 1
+LET#Y1  7.5                     $ [m] Y Achse 1
+LET#Y2 10.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  5                     $ [-] Achse 1
+LET#Y1 10.0                     $ [m] Y Achse 1
+LET#Y2 12.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_vor
+
+LET#Y  12.5                     $ [m] Y Achse
+LET#b   2.5                     $ [m] Breite der daneben liegenden Fläche
+
+#INCLUDE qD_Pf_vor
+
+LC 307 ZUG TITL 'Q_k,1'
+
+LET#Ach1  4                     $ [-] Achse 1
+LET#Y1  7.5                     $ [m] Y Achse 1
+LET#Y2 10.0                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Ach1  5                     $ [-] Achse 1
+LET#Y1 10.0                     $ [m] Y Achse 1
+LET#Y2 12.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Y  12.5                     $ [m] Y Achse
+LET#b   2.5                     $ [m] Breite der daneben liegenden Fläche
+
+#INCLUDE qD_Pf_vor
+
+LC 308 ZUG TITL 'Q_k,1'
+
+LET#Ach1  5                     $ [-] Achse 1
+LET#Y1 10.0                     $ [m] Y Achse 1
+LET#Y2 12.5                     $ [m] Y Achse 2
+
+#INCLUDE qD_hin
+
+LET#Y  12.5                     $ [m] Y Achse
+LET#b   2.5                     $ [m] Breite der daneben liegenden Fläche
+
+#INCLUDE qD_Pf_hin
+
+END
+
++PROG SOFILOAD urs:10
+
+HEAD 'Wind (W_k)'
+
+LET#q_D 0.50                    $ [kN/m²] Geschwindigkeitsdruck (Windzone 1)
+
+LEt#c_pn 1.2                    $ [-] Druckbeiwert (c_p,net - Bereich D) ; DIN EN 1991-1-4:2010-12, 7.4.1 (1), Tabelle 7.9
+
+LET#Wk #q_D*#c_pn               $ [kN/m²]
+
+LET#b1 1.25                     $ [m] Breite 1 der daneben liegenden Fläche
+LET#b2 1.25                     $ [m] Breite 2 der daneben liegenden Fläche
+
+LET#Ach1 1                      $ [-] Achse 1
+LET#Ach2 6                      $ [-] Achse 2
+
+LET#NO1 #Ach1*1000
+LET#NO2 #Ach2*1000
+
+LC 401 W TITL 'W_k'
+AREA NO  P1=+#Wk REF=LAR TYPE=PXX
+     1
+     2
+     3
+     4
+     5
+LINE Y1        Y2         P1          P2         X1=GPT X2=GPT TYPE=PXX REF=SLN
+     #NO1+200  #NO1+220  +(#Wk*#b1)  +(#Wk*#b1)
+     #NO2+200  #NO2+220  +(#Wk*#b2)  +(#Wk*#b2)
+
+LC 402 W TITL 'W_k'
+AREA NO  P1=-#Wk REF=LAR TYPE=PXX
+     1
+     2
+     3
+     4
+     5
+LINE Y1        Y2         P1          P2         X1=GPT X2=GPT TYPE=PXX REF=SLN
+     #NO1+200  #NO1+220  -(#Wk*#b1)  -(#Wk*#b1)
+     #NO2+200  #NO2+220  -(#Wk*#b2)  -(#Wk*#b2)
+
+END
+
++PROG ASE urs:11
+
+HEAD 'Analyse'
+
+GRP 1,2,3,5,11                          $ [-] Gruppen (statische Steifemodule)
+
+LC 301,302,303,304,305,306,307,308
+LC 401,402
+
+END
+
+!#!Chapter GZT: Stahlrahmen und Pfosten
++PROG TEMPLATE urs:12
+
+HEAD 'Grundkombination (ohne G, K+S)'
+
+STO#LCS 2000                                    $ [-] Lastfallnummer
+STO#EXT 'DESI'                                  $ [-] Art der Kombination
+STO#TYP 'GZT'                                   $ [-] Bezeichnung der Kombination
+
+END
+
++apply $(NAME)_1Kombinationen.dat
+
++PROG AQB urs:13
+
+HEAD 'Nachweise'
+
+STO#LCC 8000                                            $ [-] Lastfallnummer
+
+STO#XT1 'MAXD'                                          $ [-] Art der Kombination (max)
+STO#XT2 'MIND'                                          $ [-] Art der Kombination (min)
+
+BEAM TO  CS0=0 FROM=GRP
+     1                                                  $ [-] Torsionsbalken
+     2                                                  $ [-] Gründungspfähle
+     3                                                  $ [-] Pfosten
+
+#DEFINE LC_CB
+
+LC NO    TYPE  GAMU  GAMF  SUP   TITL     CST=CS0
+   5100  G_1   1.35  1.00  PERM  'G_k,1'
+   5200  G_2   1.35  1.00  PERM  'G_k,2'
+   -     #TYP  1.00  0.00  EXEX  '∑ Q_k'
+
+COMB LCST     SCOM  TITL      EXTR=#XT1 LC1=G LC2=#TYP          $ [-] zu berücksichtenden Einwirkungen
+     #LCC+1   N     'N  max'
+     #LCC+2   VZ    'VZ max'
+     #LCC+3   VY    'VY max'
+     #LCC+4   MY    'MY max'
+     #LCC+5   MZ    'MZ max'
+     #LCC+6   MT    'MT max'
+
+COMB LCST     SCOM  TITL      EXTR=#XT2 LC1=G LC2=#TYP          $ [-] zu berücksichtenden Einwirkungen
+     #LCC+11  N     'N  min'
+     #LCC+12  VZ    'VZ min'
+     #LCC+13  VY    'VY min'
+     #LCC+14  MY    'MY min'
+     #LCC+15  MZ    'MZ min'
+     #LCC+16  MT    'MT min'
+
+COMB GMAX LCST #LCC+18
+
+#ENDDEF
+
+#INCLUDE LC_CB
+
+STRE E F
+
+END
+
++PROG TEMPLATE urs:14
+
+HEAD 'Ausgabe'
+
+STO#SC 100                                              $ [-]  Maßstab 1:100
+STO#TP -4                                               $ [-]  Format des Blattes ; -4 = Hochformat A4
+STO#SL '2*1'                                            $ [-]  Anordnung der Fenster
+STO#H6 0.35                                             $ [cm] Schrift Diagramm
+STO#SH 0.40                                             $ [cm] Schrift Titel
+
+STO#PG 'Anhang T.'                                      $ [-]  Text vor Seitenummer
+STO#FR 0                                                $ [-]  Seitenummer
+
+END
+
++apply $(NAME)_2Ausnutzungsgrade.dat
+
++PROG TEMPLATE urs:15
+END
+
+!#!Chapter Ermüdung infolge Zugverkehr: Stahlrahmen und Pfosten
++PROG TEMPLATE urs:16
+
+HEAD 'Nachweisbedingungen'
+
+<TEXT>
+
+ <B>DIN EN 1993-1-9:2010-12, 8</B>
+
+ (2) Folgende Ermüdungsnachweise sind zu führen:
+
+     (γ_F,f · Δϭ_E,2) / (Δϭ_C / γ_M,f) ≤ 1,0
+
+     und
+
+     (γ_F,f · ΔT_E,2) / (ΔT_C / γ_M,f) ≤ 1,0
+
+ ANMERKUNG Die Tabellen 8.1 bis 8.9 erfordern für einige Kerbfälle
+           die Verwendung von Spannungsschwingbreiten für Hauptspannungen.
+
+ <B>DIN EN 1993-1-9:2010-12, 3</B>
+
+ (7) Die geforderte Zuverlässigkeit kann wie folgt erreicht werden:
+
+     a) Konzept der Schadenstoleranz:
+
+        - Wahl des konstruktiven Details, des Werkstoffs und des
+          Beanspruchunbgsniveaus, so dass im unwahrscheinlichen
+          Fall von Rissen ein langsames Risswachstum und große
+          kritische Risslängen erreicht werden könnten;
+
+        - Konstruktionen mit UmlagerungsvermÃ¶gen;
+
+        - Konstruktionen, die in der Lage sind, Rissentwicklungen
+          zu hemmen;
+
+        - leichte Zugänglichkeit für regelmäßige Inspektionen.
+
+     b) Konzept der ausreichenden Sicherheit gegen Ermüdungsversagen
+        ohne Vorankündigung:
+
+        - Wahl der Konstruktion und des Beanspruchungsniveaus, so
+          dass am Ende der rechnerischen Nutzungsdauer - Zuverlässigkeits-
+          werte (β-Werte) mindestens so hoch wie bei Tragsicherheits-
+          nachweisen gefordert - erreicht werden können.
+
+  ANMERKUNG Die Wahl des Bemessungskonzeptes, die Definitionen der
+            Schadensfolgeklassen sowie die Zahlenwerte für γ_M,f
+            dürfen im Nationalen Anhang geregelt werdne. Empfohlene
+            γ_M,f-Werte sind in Tabelle 3.1 angegeben.
+
+ ----------------------------------------------------------------------------
+
+ Tabelle 3.1 - Empfehlungen für γ_M,f-Faktoren für die Ermüdungsfestigkeit
+
+ ----------------------------------------------------------------------------
+
+  Bemessungskonzept                        Schadensfolgen
+
+                                        niedrig        hoch
+
+ ----------------------------------------------------------------------------
+
+  Schadenstoleranz                       1,00          1,15
+
+  Sicherheit gegen Ermüdungs-
+  versagen ohne Vorankündigung           1,15          1,35
+
+ ----------------------------------------------------------------------------
+
+ <B>DIN EN 1993-1-9:2010-12, 7.1</B>
+
+ (1) Für Nennspannungen werden die Ermüdungsfestigkeiten durch eine
+     Reihe von (log Δϭ_R) - (log N) - Kurven und (log ΔT_R) - (log N) -
+     Kurven bestimmt, wobei jede Kurve einer bestimmten Kerbfallkategorie
+     zugeordnet wird. Jeder Kerbfall ist durch die Kerbfallkategorie
+     gekennzeichnet, die den Bezugswert Δϭ_C oder ΔT_C in N/mm² der
+     Ermüdungsfestigkeitskurve bei 2 Millionen Spannungsspielen darstellt.
+
+ (2) Die Ermüdungsfestigkeitskurven für konstante Spannungsschwingbreiten
+     sind definiert durch:
+
+     Δϭ_R,m · N_R = Δϭ_C,m · (2 · 10^6)   mit m = 3 für N ≤ 5 · 10^6
+                                          siehe Bild 7.1
+
+     ΔT_R,m · N_R = ΔT_C,m · (2 · 10^6)   mit m = 5 für N ≤ 1 · 10^8
+                                          siehe Bild 7.2
+
+     Dabei ist
+
+     Δϭ_D = (2/5)^(1/3) · Δϭ_C = 0,737 · Δϭ_C      die Dauerfestigkeit,
+                                                   siehe Bild 7.1;
+
+     ΔT_L = (2/100)^(1/5) · ΔT_C = 0,457 · ΔT_C    der Schwellenwert
+                                                   der Ermüdungsfestigkeit,
+                                                   siehe Bild 7.2.
+
+ -------------------------------------------------------------------------------
+
+ <B>Dauerfestigkeit</B>
+
+     γ_M,f = 1,15 (Sicherheit gegen Ermüdungsversagen ohne Vorankündigung,
+                   niedrige Schadensfolgen)
+
+ Torsionsbalken:
+
+ (1) Nahtlose rechteckige Hohlprofile (Detail 3, Tabelle 8.1): Kerbfall 160
+
+     Δϭ_D / γ_M,f = (0,737 · 160,0) / 1,15 = 102,5
+
+ (2) Nahtlose rechteckige Hohlprofile (Detail 7, Tabelle 8.1): Kerbfall 100
+
+     ΔT_L / γ_M,f = (0,457 · 100,0) / 1,15 = 39,7
+
+ (3) Längsrippen (Detail 1, Tabelle 8.4 ; L>100): Kerbfall 56
+
+     Δϭ_D / γ_M,f = (0,737 · 56,0) / 1,15 = 35,9
+
+ Pfosten:
+
+ (1) Walzprofile mit gewalzten Kanten (Detail 2, Tabelle 8.1): Kerbfall 160
+
+     Δϭ_D / γ_M,f = (0,737 · 160,0) / 1,15 = 102,5
+
+ (2) Walzprofile mit gewalzten Kanten (Detail 6, Tabelle 8.1): Kerbfall 100
+
+     ΔT_L / γ_M,f = (0,457 · 100,0) / 1,15 = 39,7
+
+ (3) Kreuz- und T-Stöße (Detail 1, Tabelle 8.5 ; l<50): Kerbfall 80
+
+     Δϭ_D / γ_M,f = (0,737 · 80,0) / 1,15 = 51,2
+
+ Gründungspfähle:
+
+ (1) Nahtlose runde Hohlprofile (Detail 3, Tabelle 8.1): Kerbfall 160
+
+     Δϭ_D / γ_M,f = (0,737 · 160,0) / 1,15 = 102,5
+
+ (2) Nahtlose runde Hohlprofile (Detail 7, Tabelle 8.1): Kerbfall 100
+
+     ΔT_L / γ_M,f = (0,457 · 100,0) / 1,15 = 39,7
+
+ (3) Ringflanschanschluss mit zu 80% durchgeschweißten Stumpfnähten
+     (Detail 11, Tabelle 8.5): Kerbfall 71
+
+     Δϭ_D / γ_M,f = (0,737 · 71,0) / 1,15 = 45,5 MPa
+
+</TEXT>
+
+END
+
++PROG TEMPLATE urs:17
+
+HEAD 'Ermüdungskombination'
+
+STO#LCS 2100                                    $ [-] Lastfallnummer
+STO#EXT 'EXPL'                                  $ [-] Art der Kombination
+STO#TYP 'ERM'                                   $ [-] Bezeichnung der Kombination
+
+END
+
++PROG MAXIMA urs:18
+
+HEAD 'Kombinationen'
+
+COMB #LCS/10 #EXT TYPE #TYP
+
+ADD TYPE  FACU=1.0 FACF=0.0
+    ZUG
+
+SUPP LC      TYPE  TITL      EXTR=MAX COMB=#LCS/10 ETYP=BEAM
+     #LCS+1  N     'N  max'
+     #LCS+2  VZ    'VZ max'
+     #LCS+3  VY    'VY max'
+     #LCS+4  MY    'MY max'
+     #LCS+5  MZ    'MZ max'
+     #LCS+6  MT    'MT max'
+
+SUPP LC       TYPE  TITL      EXTR=MIN COMB=#LCS/10 ETYP=BEAM
+     #LCS+11  N     'N  min'
+     #LCS+12  VZ    'VZ min'
+     #LCS+13  VY    'VY min'
+     #LCS+14  MY    'MY min'
+     #LCS+15  MZ    'MZ min'
+     #LCS+16  MT    'MT min'
+
+END
+
++PROG AQB urs:19
+
+HEAD 'Nachweise'
+
+STO#LCC 8100                                            $ [-] Lastfallnummer
+
+STO#XT1 'MAXD'                                          $ [-] Art der Kombination (max)
+STO#XT2 'MIND'                                          $ [-] Art der Kombination (min)
+
+BEAM TO  CS0=0 FROM=GRP
+     1                                                  $ [-] Torsionsbalken
+     2                                                  $ [-] Gründungspfähle
+     3                                                  $ [-] Pfosten
+
+#DEFINE LC_CB_E
+
+LC NO    TYPE  GAMU  GAMF  SUP   TITL     CST=CS0
+   -     #TYP  1.00  0.00  EXEX  'Q_k,1'
+
+COMB LCST     SCOM  TITL      EXTR=#XT1 LC1=#TYP        $ [-] zu berücksichtenden Einwirkungen
+     #LCC+1   N     'N  max'
+     #LCC+2   VZ    'VZ max'
+     #LCC+3   VY    'VY max'
+     #LCC+4   MY    'MY max'
+     #LCC+5   MZ    'MZ max'
+     #LCC+6   MT    'MT max'
+
+COMB LCST     SCOM  TITL      EXTR=#XT2 LC1=#TYP        $ [-] zu berücksichtenden Einwirkungen
+     #LCC+11  N     'N  min'
+     #LCC+12  VZ    'VZ min'
+     #LCC+13  VY    'VY min'
+     #LCC+14  MY    'MY min'
+     #LCC+15  MZ    'MZ min'
+     #LCC+16  MT    'MT min'
+
+COMB GMAX LCST #LCC+18
+
+#ENDDEF
+
+#INCLUDE LC_CB_E
+
+STRE E
+
+END
+
++PROG TEMPLATE urs:20
+
+HEAD 'Ausgabe'
+
+STO#SC 100                                              $ [-]  Maßstab 1:100
+
+STO#PG 'Anhang E.'                                      $ [-]  Text vor Seitenummer
+STO#FR 0                                                $ [-]  Seitenummer
+
+END
+
++apply $(NAME)_2Schwingbreite.dat
+
++PROG TEMPLATE urs:21
+END
+
+!#!Chapter GZG: Verformungen
++PROG TEMPLATE urs:22
+
+HEAD 'Nachweisbedingungen'
+
+<TEXT>
+
+ <B>DIN EN 1990:2010-12, 3.4</B>
+
+ (3) Die Gebrauchstauglichkeitsnachweise sollten auf folgende
+     Kriterien eingehen:
+
+     a) Verformungen und Verschiebungen, die das
+
+        ...
+
+        - die Funktionen des Tragwerks (einschließlich der
+          Funktionsfähigkeit von Maschinen und Installationen)
+          beeinflussen ...
+
+     b) Schwingungen,
+
+        ...
+
+        - die Funktionsfähigkeit des Tragwerks einschränken;
+
+     c) Schäden, die voraussichtlich das
+
+        ...
+
+        - die Dauerhaftigkeit oder
+
+        - die Funktionsfähigkeit des Tragwerks nachteilig
+          beeinflussen.
+
+ ANMERKUNG Weitere Regelungen zu Gebrauchstauglichkeitskriterien
+           sind in EN1992 bis EN1999 zu finden.
+
+</TEXT>
+
+END
+
++PROG TEMPLATE urs:23
+
+HEAD 'Charakteristische Kombination'
+
+STO#LCS 2200                                    $ [-] Lastfallnummer
+STO#EXT 'RARE'                                  $ [-] Art der Kombination
+STO#TYP 'NONE'                                  $ [-] Bezeichnung der Kombination
+
+END
+
++PROG MAXIMA urs:24
+
+HEAD 'Kombinationen'
+
+COMB #LCS/10 #EXT TYPE #TYP
+
+ACT G_1
+        LC 5100
+
+ACT G_2
+        LC 5200
+
+ACT TYPE
+    ZUG
+    W
+
+SUPP LC      TYPE  TITL      EXTR=MAX COMB=#LCS/10 ETYP=NODE
+     #LCS+1  UX    'Ux max'
+     #LCS+3  UZ    'Uz max'
+
+SUPP LC       TYPE  TITL      EXTR=MIN COMB=#LCS/10 ETYP=NODE
+     #LCS+11  UX    'Ux min'
+     #LCS+13  UZ    'Uz min'
+
+END
+
++PROG TEMPLATE urs:25
+
+HEAD 'Ausgabe'
+
+STO#SC 200                                              $ [-]  Maßstab 1:200
+
+STO#PG 'Anhang G.'                                      $ [-]  Text vor Seitenummer
+STO#FR 0                                                $ [-]  Seitenummer
+
+END
+
++apply $(NAME)_2Verformungen.dat
+
++PROG TEMPLATE urs:26
+END
+
+!#!Chapter GEO: Gründungspfähle
++PROG TEMPLATE urs:27
+
+HEAD 'Nachweisbedingungen'
+
+<TEXT>
+
+ <B>DIN 1054:2010-12, 7.2</B>
+
+ ANMERKUNG Der Nachweis gegen Tragfähigkeitsverlust des Bodens in der
+           Pfahlumgebung wird mit dem Nachweisverfahren (GEO-2) geführt,
+           siehe 2.4.7.3.4.3.
+
+ <B>DIN 1054:2010-12, 2.4.7.3.4.3</B>
+
+ A(1) Das Nachweisverfahren 2 ist bei der Ermittlung der Schnittgrößen
+      sowie beim Nachweis eines ausreichenden Erdwiderstands, beim
+      Nachweis der Sicherheit gegen Gleiten und Grundbruch, beim
+      Nachweis der Tragfähigkeit von Pfählen und Ankern und beim
+      Nachweis der Standsicherheit in der tiefen Gleitfuge anzuwenden.
+      Es darf auch angewendet werden, um die Standsicherheit von
+      konstruktiven Böschungssicherungen nachzuweisen. Grenzzustände
+      des Bodens, bei denen das Nachweisverfahren 2 verwendet wird,
+      werden als GEO-2 bezeichnet.
+
+ A(2) Die Bemessungswerte der Beanspruchungen E_d sind im Nachweis-
+      verfahren 2 nach (2.6b) mit den Kombinationsgleichungen A(2.6f)
+      bis A(2.6h) zu ermitteln.
+
+ <B>DIN EN 1997-1:2009-09, 2.4.7.3.2</B>
+
+ (1) Die Teilsicherheitsbeiwerte für die Einwirkungen können entweder auf
+     die Einwirkungen (F_rep) selbst oder ihre Beanspruchungen (E) angewendet
+     werden:
+
+     E_d = E { γ_F • F_rep ; X_k / γ_M ; a_d }    (2.6a)
+
+     oder
+
+     E_d = γ_E • E { F_rep ; X_k / γ_M ; a_d }    (2.6b)
+
+
+ <B>DIN EN 1997-1/NA:2010-12, 2.4.7.3.2</B>
+
+ (3)P Die Zahlenwerte der Teilsicherheitsbeiwerte für Einwirkungen bzw.
+      Beanspruchungen in den einzelnen Grenzzuständen und Bemessungs-
+      situationen sind DIN 1054:2010-12, Tabelle A 2.1, zu entnehmen.
+
+ <B>DIN 1054:2010-12, A 2.4.7.6.1</B>
+
+ A(1) Beim Nachweis von Grenzzuständen sind für Einwirkungen bzw. Beanspruchungen
+      die Teilsicherheitsbeiwerte der Tabelle A 2.1 zu verwenden.
+
+ -----------------------------------------------------------------------------------
+
+ Tabelle A 2.1 - Teilsicherheitsbeiwerte γ_F 1) bzw. γ_E 2) für Einwirkungen
+                 und Beanspruchungen
+
+ -----------------------------------------------------------------------------------
+
+ Einwirkung bzw. Beanspruchung     Formelzeichen     Bemessungssituation
+
+                                                     BS-P     BS-T     BS-A
+
+ -----------------------------------------------------------------------------------
+
+ ...
+
+ -----------------------------------------------------------------------------------
+
+ STR und GEO-2: Grenzzustand des Versagens von Bauwerken, Bauteilen und Baugrund
+
+ Beanspruchungen aus ständigen       γ_G             1,35     1,20     1,10
+ Einwirkungen allgemein a
+
+ Beanspruchungen aus günstigen       γ_G,inf         1,00     1,00     1,00
+ ständigen Einwirkungen b
+
+ Beanspruchungen aus ständigen       γ_G,E0          1,20     1,10     1,00
+ Einwirkungen aus Erdruhedruck
+
+ Beanspruchungen aus ungünstigen     γ_Q             1,50     1,30     1,10
+ veränderlichen Einwirkungen
+
+ Beanspruchungen aus günstigen       γ_Q             0,00     0,00     0,00
+ veränderlichen Einwirkungen
+
+ -----------------------------------------------------------------------------------
+
+ ...
+
+ -----------------------------------------------------------------------------------
+
+ a einschließlich ständigem und veränderlichem Wasserdruck.
+
+ b nur im Sonderfall nach 7.6.3.1 A(2)
+
+ -----------------------------------------------------------------------------------
+
+ 1) Der Beiwert γ_F ist Oberbegriff für die jeweils auf den Einzelfall der
+    Einwirkungen F bezogen Teilsicherheitsbeiwerte.
+
+ 2) Der Beiwert γ_E ist Oberbegriff für die jeweils auf den Einzelfall der
+    Beanspruchungen E bezogen Teilsicherheitsbeiwerte.
+
+ ...
+
+ ANMERKUNG 2 Die Teilsicherheitsbeiwerte γ_G,E0 sind gegenüber den Teilsicherheits-
+             beiwerten γ_G herabgesetzt worden, weil der Erdruhedruck bereits bei
+             geringen Entspannungsbewegungen auf einen geringeren Erddruck, im
+             Grenzfall auf den wesentlich kleineren aktiven Erddruck absinkt.
+
+ ...
+
+ <B>DIN 1054:2010-12, 2.4.7.3.2</B>
+
+ A(1d) Im Fall der Nachweisführung mit linear-elastischer Theorie und
+       Gültigkeit des Superpositionsprinzips sind mit dem Nachweis-
+       verfahren 2 nach 2.4.7.3.4.3 A(3) die Einwirkungen stets als
+       charakteristische Werte G_k bzw. Q_k in die Berechnung einzuführen.
+       Erst bei der Aufstellung der Grenzzustandsbedingung sind die mit
+       diesen Werten ermittelten charakteristischen bzw. repräsentativen
+       Beanspruchungen in Form von Schnittgrößen (z. B. Querkräfte,
+       Auflagerkräfte, Biegemomente) oder Spannungen (z. B. Normal-
+       spannungen, Schubspannungen, Vergleichsspannungen) mit dem Teil-
+       sicherheitsbeiwert γ_F und ggf. mit den Kombinationsbeiwerten Ψ
+       für Einwirkungen bzw. Beanspruchungen in Bemessungswerte E_d der
+       Beanspruchungen umzurechnen. Danach ergeben sich die Bemessungs-
+       werte der Gesamtbeanspruchungen
+
+       - bei der Bemessungssituation BS-P und BS-T nach der Gleichung
+
+         E_d = ∑ γ_G,j • E(G_k,j) + γ_P • E(P_k) + γ_Q,1 • E(Q_k,1) + ∑ γ_Q,i • Ψ_0,i • E(Q_k,i)   A(2.6f)
+
+       ...
+
+ <B>DIN 1054:2010-12, 2.4.7.3.4.3</B>
+
+ A(3) Das Nachweisverfahren 2 (STR und GEO-2) besteht aus folgenden
+      Schritten, sofern nicht im Einzelfall etwas anderes zweckmäßig
+      ist oder, z. B. in 7.6.3.1 A(3), verlangt wird:
+
+      ...
+
+      3) Ermittlung der charakteristischen bzw. repräsentativen Beanspruchungen
+         E_Gk,i bzw. E_Qrep,i in Form von Schnittgrößen, z. B. Querkräfte,
+         Auflagerkräfte, Biegemomente, oder Spannungen, z. B. Normalspannungen,
+         Schubspannungen, Vergleichspannugen, in den maßgebenden Schnitten durch
+         das Bauwerk und in Berührungsflächen zwischen Bauwerk und Baugrund, bei
+         linear-elastischen Systemen getrennt nach ständigen Einwirkungen,
+         regelmäßig auftretenden veränderlichen Einwirkungen und begleitenden
+         veränderlichen Einwirkungen, gegebenenfalls mit ihren Kombinations-
+         beiwerten entsprechend den maßgebenden Bemessungssituationen nach 2.2;
+
+      4) Ermittlung der charakteristischen Widerstände R_k,i des Baugrunds,
+         z. B. Erdwiderstand, Grundbruchwiderstand, Pfahlwiderstand oder
+         Herausziehwiderstand von Ankern, durch Berechnung, Probebelastung
+         oder aufgrund von Erfahungswerten;
+
+      5) Ermittlung der Bemessungswerte E_d,i der Beanspruchungen durch
+         Multiplikation der charakteristischen bzw. repräsentativen
+         Beanspruchungen mit den Teilsicherheitsbeiwerten für Einwirkungen.
+
+      6) Ermittlung der Bemessungswerte R_d,i der Widerstände des Baugrunds
+         durch Division der charakteristischen Widerstände R_k,i mit den
+         Teilsicherheitsbeiwerten γ_R für Bodenwiderstände: R_d,i = R_k,i / γ_R
+         sowie Ermittlung der Bemessungswiderstände R_d,i der Bauteile, z. B.
+         widerstehende Druck-, Zug-, Querkräfte, Biegemomente oder Spannungen
+         nach den Regeln der jeweiligen Bauartnormen.
+
+      7) Nachweis der Einhaltung der Grenzzustandsbedingung
+
+         E_d = ∑ E_d,i ≤ ∑ R_d,i = R_d
+
+         mit den Bemessungswerten E_d der Beanspruchungen und den Bemessungs-
+         widerständen R_d in den maßgebenden Schnitten.
+
+ <B>DIN 1054:2010-12, A 2.4.7.6.3</B>
+
+ A(1) Beim Nachweis geotechnischer Grenzzustände sind für Widerstände die
+      Teilsicherheitsbeiwerte der Tabelle A 2.3 zu verwenden.
+
+ -----------------------------------------------------------------------------------
+
+ Tabelle A 2.3 - Teilsicherheitsbeiwerte γ_R 4) für Widerstände
+
+ -----------------------------------------------------------------------------------
+
+         Widerstand                Formelzeichen       Bemessungssituation
+
+                                                       BS-P     BS-T     BS-A
+
+ -----------------------------------------------------------------------------------
+
+ STR und GEO-2: Grenzzustand des Versagens von Bauwerken, Bauteilen und Baugrund
+
+ ...
+
+ Pfahlwiderstände aus statischen und dynamischen Pfahlprobebelastungen
+
+ - Fußwiderstand                     γ_b               1,10     1,10     1,10
+
+ - Mantelwiderstand (Druck)          γ_s               1,10     1,10     1,10
+
+ - Gesamtwiderstand (Druck)          γ_t               1,10     1,10     1,10
+
+ - Mantelwiderstand (Zug)            γ_s,t             1,15     1,15     1,15
+
+ Pfahlwiderstände auf Grundlage von Erfahrungswerten
+
+ - Druckpfähle                       γ_b, γ_s, γ_t     1,40     1,40     1,40
+
+ - Zugpfähle (nur in                 γ_s,t             1,50     1,50     1,50
+   Ausnahmefällen)
+
+ ...
+
+ -----------------------------------------------------------------------------------
+
+ ...
+
+ 4) Der Beiwert γ_R ist ein Oberbegriff für die jeweils auf den Einzelfall des
+    Widerstands bezogenen Teilsicherheitsbeiwerte.
+
+</TEXT>
+
+END
+
++PROG TEMPLATE urs:28
+
+HEAD 'GEO-2 Kombination'
+
+STO#LCS 2300                                    $ [-] Lastfallnummer
+STO#EXT 'DESI'                                  $ [-] Art der Kombination
+STO#TYP 'NONE'                                  $ [-] Bezeichnung der Kombination
+
+END
+
++PROG MAXIMA urs:29
+
+HEAD 'Kombinationen'
+
+COMB #LCS/10 #EXT TYPE #TYP
+
+ACT G_1
+        LC 5100
+
+ACT G_2
+        LC 5200
+
+ACT TYPE
+    ZUG
+    W
+
+SUPP LC      TYPE  TITL      EXTR=MAX COMB=#LCS/10 ETYP=NODE
+     #LCS+1  PZ    'Pz max'
+
+SUPP LC       TYPE  TITL      EXTR=MAX COMB=#LCS/10 ETYP=NODE
+     #LCS+11  PZ    'Pz min'
+
+END
+
++PROG TEMPLATE urs:30
+
+HEAD 'Ausgabe'
+
+STO#SC 200                                              $ [-]  Maßstab 1:200
+
+STO#PG 'Anhang O.'                                      $ [-]  Text vor Seitenummer
+STO#FR 0                                                $ [-]  Seitenummer
+
+END
+
++apply $(NAME)_3Auflagerreaktionen.dat
+
++PROG TEMPLATE urs:31
+END
+
+!#!Chapter zusätzliche Infos
++PROG TEMPLATE urs:32
+
+HEAD 'Ausgabe: Schnittgrößen'
+
+STO#SC 200                                              $ [-]  Maßstab 1:200
+
+STO#PG 'Anhang S.'                                      $ [-]  Text vor Seitenummer
+STO#FR 0                                                $ [-]  Seitenummer
+
+STO#LS1 8000                                            $ [-] Lastfallnummer
+$STO#LS2 8020                                            $ [-] Lastfallnummer
+
+END
+
++apply $(NAME)_3Schnittgroessen.dat
+
++PROG TEMPLATE urs:33
+
+HEAD 'Ausgabe: Belastung'
+
+STO#SC 200                                              $ [-]  Maßstab 1:200
+
+STO#PG 'Anhang B.'                                      $ [-]  Text vor Seitenummer
+STO#FR 0                                                $ [-]  Seitenummer
+
+END
+
++apply $(NAME)_3Belastung.dat
+
++PROG TEMPLATE urs:34
+
+HEAD 'Ausgabe: Modell'
+
+STO#SC 200                                              $ [-]  Maßstab 1:200
+
+STO#PG 'Anhang M.'                                      $ [-]  Text vor Seitenummer
+STO#FR 0                                                $ [-]  Seitenummer
+
+END
+
++apply $(NAME)_3Modell.dat
+

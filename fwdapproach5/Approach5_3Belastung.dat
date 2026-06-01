@@ -1,0 +1,222 @@
++PROG WING urs:42
+
+HEAD 'Belastung: G_k,1 + G_k,2'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -0.864813 Y 0.422351 Z -0.271511 AXIS NEGZ ROTA 0      $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'G_k,1'
+
+LC   NO 5100
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 2.0 SCHH YES SING VECT REPR DREP GTYP INP
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'G_k,2'
+
+LC   NO 5200
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 2.0 SCHH YES SING VECT REPR DREP GTYP INP
+
+END
+
++PROG WING
+
+HEAD 'Belastung: Q_k,1 (1+2)'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -0.864813 Y 0.422351 Z -0.271511 AXIS NEGZ ROTA 0      $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (1)'
+
+LC   NO 301
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (2)'
+
+LC   NO 302
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+END
+
++PROG WING
+
+HEAD 'Belastung: Q_k,1 (3+4)'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -0.864813 Y 0.422351 Z -0.271511 AXIS NEGZ ROTA 0      $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (3)'
+
+LC   NO 303
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (4)'
+
+LC   NO 304
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+END
+
++PROG WING
+
+HEAD 'Belastung: Q_k,1 (5+6)'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -0.864813 Y 0.422351 Z -0.271511 AXIS NEGZ ROTA 0      $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (5)'
+
+LC   NO 305
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (6)'
+
+LC   NO 306
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+END
+
++PROG WING
+
+HEAD 'Belastung: Q_k,1 (7+8)'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -0.864813 Y 0.422351 Z -0.271511 AXIS NEGZ ROTA 0      $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (7)'
+
+LC   NO 307
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Q_k,1 (8)'
+
+LC   NO 308
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.20 SCHH YES SING VECT REPR DREP GTYP INP
+
+END
+
++PROG WING
+
+HEAD 'Belastung: W_k (1+2)'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -0.864813 Y 0.422351 Z -0.271511 AXIS NEGZ ROTA 0      $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'W_k (1)'
+
+LC   NO 401
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.75 SCHH YES SING VECT REPR DREP GTYP INP
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'W_k (2)'
+
+LC   NO 402
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+LOAD TYPE ALL UNIT 0.75 SCHH YES SING VECT REPR DREP GTYP INP
+
+END
+

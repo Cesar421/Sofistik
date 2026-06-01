@@ -1,0 +1,28 @@
++PROG MAXIMA
+
+HEAD 'Kombinationen'
+
+COMB #LCS/10 #EXT TYPE #TYP
+
+ACT TYPE
+    ZUG
+    W
+
+SUPP LC      TYPE  TITL      EXTR=MAX COMB=#LCS/10 ETYP=BEAM
+     #LCS+1  N     'N  max'
+     #LCS+2  VZ    'VZ max'
+     #LCS+3  VY    'VY max'
+     #LCS+4  MY    'MY max'
+     #LCS+5  MZ    'MZ max'
+     #LCS+6  MT    'MT max'
+
+SUPP LC       TYPE  TITL      EXTR=MIN COMB=#LCS/10 ETYP=BEAM
+     #LCS+11  N     'N  min'
+     #LCS+12  VZ    'VZ min'
+     #LCS+13  VY    'VY min'
+     #LCS+14  MY    'MY min'
+     #LCS+15  MZ    'MZ min'
+     #LCS+16  MT    'MT min'
+
+END
+

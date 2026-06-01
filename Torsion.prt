@@ -3,54 +3,54 @@
    
    SOFiSTiK 2024-10.0.1119    BEMESS - DESIGN OF PLATES AND SH
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   112. access
-   TIME NEEDED         1, TOTAL         1
-   DATE       2026-05-21, 19:31:25
+   Project data base Torsion.cdb          -   504. access
+   TIME NEEDED         0, TOTAL         0
+   DATE       2026-06-01, 20:21:09
    *** Stop : Program bemess
    *** Start: Program aqua :  Materials
    
    SOFiSTiK 2024-10.0.1119    AQUA   - GENERAL SECTIONS
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   113. access
+   Project data base Torsion.cdb          -   505. access
    TIME NEEDED         0, TOTAL         0
-   DATE       2026-05-21, 19:31:25
+   DATE       2026-06-01, 20:21:09
    *** Stop : Program aqua
    *** Start: Program aqua :  Cross Sections
    
    SOFiSTiK 2024-10.0.1119    AQUA   - GENERAL SECTIONS
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   114. access
+   Project data base Torsion.cdb          -   506. access
    TIME NEEDED         1, TOTAL         1
-   DATE       2026-05-21, 19:31:27
+   DATE       2026-06-01, 20:21:11
    *** Stop : Program aqua
    *** Start: Program aqua :  Bore and Soil Profiles
    
    SOFiSTiK 2024-10.0.1119    AQUA   - GENERAL SECTIONS
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   115. access
+   Project data base Torsion.cdb          -   507. access
    TIME NEEDED         0, TOTAL         0
-   DATE       2026-05-21, 19:31:27
+   DATE       2026-06-01, 20:21:11
    *** Stop : Program aqua
    *** Start: Program template :  Action Manager
    
    SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   116. access
-   TIME NEEDED         0, TOTAL         0
-   DATE       2026-05-21, 19:31:28
+   Project data base Torsion.cdb          -   508. access
+   TIME NEEDED         1, TOTAL         1
+   DATE       2026-06-01, 20:21:12
    *** Stop : Program template
    *** Start: Program ase :  Linear Analysis
    
    SOFiSTiK 2024-10.0.1119    ASE   - ADVANCED SOLUTION ENGINE
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   117. access
+   Project data base Torsion.cdb          -   509. access
    load case     1
    
    Parameter of System of Equation   3
    (Sparse Direct Solver)
-   Number of unknowns              468
-   Total entries                  2139
-   Total entries after fill       2720
+   Number of unknowns              894
+   Total entries                  3273
+   Total entries after fill       4706
    +++++ warning no.    89 in program TVNON
    Circular values for pile-bedding only applied for nonlinear analysis
    +++++ warning no.    89 in program TVNON
@@ -77,7 +77,7 @@
    Circular values for pile-bedding only applied for nonlinear analysis
    TIME NEEDED         0, TOTAL         0
    TIME NEEDED         0, TOTAL         0
-   DATE       2026-05-21, 19:31:28
+   DATE       2026-06-01, 20:21:12
    
    
    
@@ -91,29 +91,111 @@
           1       1     1 : All loads (in components)  LC:         11
           1       2     1 : All loads (in components)  LC:         12
    TIME NEEDED         0, TOTAL         0
-   DATE       2026-05-21, 19:31:29
+   DATE       2026-06-01, 20:21:13
    *** Stop : Program wing
-   *** Start: Program dyna
+   *** Start: Program ase
    
-   SOFiSTiK 2024-10.0.1119    DYNA   - DYNAMIC ANALYSIS
+   SOFiSTiK 2024-10.0.1119    ASE   - ADVANCED SOLUTION ENGINE
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   118. access
+   Project data base Torsion.cdb          -   510. access
+   +++++ warning no.    89 in program TVNON
+   Circular values for pile-bedding only applied for nonlinear analysis
+   +++++ warning no.    89 in program TVNON
+   Circular values for pile-bedding only applied for nonlinear analysis
+   +++++ warning no.    89 in program TVNON
+   Circular values for pile-bedding only applied for nonlinear analysis
+   TIME NEEDED         1, TOTAL         1
+   TIME NEEDED         0, TOTAL         1
+   DATE       2026-06-01, 20:21:14
+   
+   
+   
+    +++++    0 errors and    3 warnings +++++
+   *** Stop : Program ase
+   *** Start: Program sofiload
+   
+   SOFiSTiK 2024-10.0.1119    SOFILOAD - LOAD GENERATOR
+   Output on file Torsion.plb
+   Project data base Torsion.cdb          -   511. access
    TIME NEEDED         0, TOTAL         0
    TIME NEEDED         0, TOTAL         0
-   DATE       2026-05-21, 19:31:29
-   *** Stop : Program dyna
+   DATE       2026-06-01, 20:21:14
+   *** Stop : Program sofiload
    *** Start: Program maxima
    
    SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
    Output on file Torsion.plb
-   Project data base Torsion.cdb          -   119. access
-   +++++ warning no. 12283 in program INIT_ACT:ZUG ; input line:   10
+   Project data base Torsion.cdb          -   512. access
+   +++++ warning no. 12283 in program INIT_ACT:ZUG ; input line:   15
+   Combination coefficientψ₁inf         of the action ZUG does not fit (must be monoton descendant)
+   i.e. psi0 (rare) >= ps1s (non frequ.) >= psi1 (frequent) >= psi2 (permanent)
+              0.800>=           0.000>=           0.700>=           0.500
+   TIME NEEDED         1, TOTAL         1
+   TIME NEEDED         0, TOTAL         1
+   DATE       2026-06-01, 20:21:15
+   
+   
+   
+    +++++    0 errors and    1 warnings +++++
+   *** Stop : Program maxima
+   *** Start: Program aqb
+   
+   SOFiSTiK 2024-10.0.1119    AQB     - DESIGN OF SECTIONS
+   Output on file Torsion.plb
+   Project data base Torsion.cdb          -   513. access
+   Workspace                    38.1 Megabyte
+   TIME NEEDED         1, TOTAL         1
+   TIME NEEDED         0, TOTAL         1
+   DATE       2026-06-01, 20:21:16
+   *** Stop : Program aqb
+   *** Start: Program maxima
+   
+   SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
+   Output on file Torsion.plb
+   Project data base Torsion.cdb          -   514. access
+   TIME NEEDED         0, TOTAL         0
+   TIME NEEDED         0, TOTAL         0
+   DATE       2026-06-01, 20:21:17
+   *** Stop : Program maxima
+   *** Start: Program aqb
+   
+   SOFiSTiK 2024-10.0.1119    AQB     - DESIGN OF SECTIONS
+   Output on file Torsion.plb
+   Project data base Torsion.cdb          -   515. access
+   Workspace                    38.1 Megabyte
+   TIME NEEDED         1, TOTAL         1
+   TIME NEEDED         0, TOTAL         1
+   DATE       2026-06-01, 20:21:18
+   *** Stop : Program aqb
+   *** Start: Program maxima
+   
+   SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
+   Output on file Torsion.plb
+   Project data base Torsion.cdb          -   516. access
+   +++++ warning no. 12283 in program INIT_ACT:ZUG ; input line:   15
+   Combination coefficientψ₁inf         of the action ZUG does not fit (must be monoton descendant)
+   i.e. psi0 (rare) >= ps1s (non frequ.) >= psi1 (frequent) >= psi2 (permanent)
+              0.800>=           0.000>=           0.700>=           0.500
+   TIME NEEDED         1, TOTAL         1
+   TIME NEEDED         0, TOTAL         1
+   DATE       2026-06-01, 20:21:20
+   
+   
+   
+    +++++    0 errors and    1 warnings +++++
+   *** Stop : Program maxima
+   *** Start: Program maxima
+   
+   SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
+   Output on file Torsion.plb
+   Project data base Torsion.cdb          -   517. access
+   +++++ warning no. 12283 in program INIT_ACT:ZUG ; input line:   15
    Combination coefficientψ₁inf         of the action ZUG does not fit (must be monoton descendant)
    i.e. psi0 (rare) >= ps1s (non frequ.) >= psi1 (frequent) >= psi2 (permanent)
               0.800>=           0.000>=           0.700>=           0.500
    TIME NEEDED         0, TOTAL         0
    TIME NEEDED         0, TOTAL         0
-   DATE       2026-05-21, 19:31:30
+   DATE       2026-06-01, 20:21:20
    
    
    

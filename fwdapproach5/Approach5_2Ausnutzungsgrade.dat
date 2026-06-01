@@ -1,0 +1,39 @@
++PROG WING
+
+HEAD 'Stahlrahmen und Pfosten: Ausnutzungsgrade'
+
+STO#FR #FR+0.5                                          $ [-]  Seitenummer
+
+#DEFINE FORMAT
+
+PAGE LANO  UNIO  FIRS  PAG
+     #LN   #UO   #FR   #PG
+
+SIZE TYPE  SC        SPLI
+     #TP   #SC*1E10  #SL
+
+SIZ2 DRUU  DRUD  DRUL  DRUR                                             $ [cm] Ränder
+     2.7   2.0   2.0   1.0
+
+#ENDDEF
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0            $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Ausnutzungsgrade (elastisch-elastisch)'
+
+LC   DESI #LCC+18
+AND  POSI 1 POSL 0 POSR 100 POSD 0 POSU 100             $ [-] Lage des Fensters
+
+BEAM TYPE CSGV UNIT 0.5 SCHH YES
+
+END
+

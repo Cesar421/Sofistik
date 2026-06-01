@@ -1,0 +1,100 @@
+$ table of AQB loadcases created by CSM:
+LC 5100 TYPE "G_1 " CST  100 REF 'PART' SUP PERM
+LC 5200 TYPE "G_2 " CST  200 REF 'PART' SUP PERM
+$ --------------------- end of AQB-LC list -----------
+$
+$ *************************************************************
+$
+$ block of BEAM CS definition:
+$    To use as following lines after a BEAM input  $$:
+$    BEAM NO 10001 $$
+$    include aqb_beam_cs
+$
+#define aqb_beam_cs
+ CS - $ sections without construction stages
+#enddef
+$ *************************************************************
+$
+$ MAXIMA block for action ACT GPC (5000.. loadcsaes):
+$ To use in MAXIMA e.g.:
+$     [$(project)_csmlf.dat must be included before MAXIMA]
+$     [so that the max_act_g blocs are defined,]
+$     [best after a double "END"
+$                          "END"
+$      see csm.dat\english\more\csm31_design_maxi.dat ]:
+$
+$ END
+$ END
+$ #include "$(project)_csmlf.dat"
+$ PROG MAXIMA
+$ HEAD
+$   COMB  .. desi BASE ..
+$     ACT G
+$       #include max_act_g
+$                (or G_1 G_2 separate useable)
+$     ACT P
+$       #include max_act_p  $ or   m_p_infsup
+$     ACT C
+$       #include max_act_c
+$
+#define max_act_g
+      LC  5100 ;  5200
+#enddef
+$
+$                 G_1 G_2 .. separate :
+#define maxactg_1
+      LC  5100
+#enddef
+$
+#define maxactg_2
+      LC  5200
+#enddef
+$
+#define max_act_p
+#enddef
+$
+#define m_p_infsup
+#enddef
+$
+#define max_act_c
+#enddef
+$ *************************************************************
+$
+#define csmgrp100
+$ ----------------------------------- Construction Stage 100  ----------------
+ GRP   1 CS 100
+ GRP   2 CS 100
+ GRP   3 CS 100
+ GRP   5 CS 100
+ GRP  11 CS 100
+#enddef
+#define csmgrp200
+$ ----------------------------------- Construction Stage 200  ----------------
+ GRP   1 CS 200
+ GRP   2 CS 200
+ GRP   3 CS 200
+ GRP   5 CS 200
+ GRP  11 CS 200
+#enddef
+$ *************************************************************
+#define stage_design
+$ table for construction stage design - example see csm34_stage_design.dat
+$ usage: set variable cs_design, e.g,. sto#cs_design 120
+$ then set the GAMU defines, e.g.
+$    #define GAMU_G_1=GAMU 1.35 GAMF 1.00   $  dead load       take sum of all effects of G_1 with 1.35 or 1.00
+$    #define GAMU_G_2=GAMU 1.35 GAMF 1.00   $  add.dead        take sum of all effects of G_2 with 1.35 or 1.00
+$    #define GAMU_P=GAMU 1.00 GAMF 1.00   $  prestress
+$     creep is already defined in the #include stage_design
+$ then set #include stage_design
+$ -> with this only the loadcases belonging to this stage are set
+$    and can be selected easily e.g. with COMB ... LC1 G LC2 P LC3 C .
+$    With this the corresponding safety and psi values are taken into account.
+$
+LET#LOOPSIZE 4999
+$
+if $(cs_design)>=100 ; LC 5100 TYPE "G_1 " CST  100 REF 'PART' SUP PERM $(GAMU_G_1) ; endif
+if $(cs_design)>=200 ; LC 5200 TYPE "G_2 " CST  200 REF 'PART' SUP PERM $(GAMU_G_2) ; endif
+$ --------------------- end of construction stage design - see csm34_stage_design.dat -----------
+#enddef
+$ *************************************************************
+$

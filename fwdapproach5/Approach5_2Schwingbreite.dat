@@ -1,0 +1,176 @@
++PROG WING
+
+HEAD 'Torsionsbalken: Schwingbreite'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0                            $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1                                                                   $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Schwingbreite an der linke Seite der Gurte'
+
+LC   DESI #LCC+18  MAT 'P__7'
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+BEAM TYPE SWPT UNIT 5.0 SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Schwingbreite an der rechte Seite der Gurte'
+
+LC   DESI #LCC+18  MAT 'P__3'
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+BEAM TYPE SWPT UNIT 5.0 SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Pfosten: Schwingbreite'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0                            $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 3                                                                   $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Schwingbreite am oberen Gurt'
+
+LC   DESI #LCC+18  MAT 'P__1'
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+BEAM TYPE SWPT UNIT 50.0 SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Schwingbreite am unteren Gurt'
+
+LC   DESI #LCC+18  MAT 'P__7'
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+BEAM TYPE SWPT UNIT 50.0 SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Pfosten: Schubspannungen'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0                            $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 3                                                                   $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Schubspannungen am Steg'
+
+LC   DESI #LCC+2  MAT 'P__4'                                            $ [-] Spannungspunkt am Steg
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+BEAM TYPE STPT UNIT 3.0 SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Schubspannungen am Steg'
+
+LC   DESI #LCC+12  MAT 'P__4'                                           $ [-] Spannungspunkt am Steg
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+BEAM TYPE STPT UNIT 3.0 SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Gründungspfähle: Schwingbreite'
+
+STO#SC 200                                                              $ [-]  Maßstab 1:200
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0                            $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 2                                                                   $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'Schwingbreite'
+
+LC   DESI #LCC+18  MAT _MAX REF 0
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+BEAM TYPE SWPT UNIT 15.0 SCHH YES
+
+END
+
++PROG WING
+
+HEAD 'Gründungspfähle: Schubspannungen'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0                            $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 2                                                                   $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Schubspannungen'
+
+LC   DESI #LCC+2  MAT 'U03'                                             $ [-] Spannungspunkt
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+BEAM TYPE STPT UNIT 1.0 SCHH YES
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Schubspannungen'
+
+LC   DESI #LCC+12  MAT 'U03'                                            $ [-] Spannungspunkt
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+BEAM TYPE STPT UNIT 1.0 SCHH YES
+
+END
+

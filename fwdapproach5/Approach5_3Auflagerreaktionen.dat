@@ -1,0 +1,37 @@
++PROG WING
+
+HEAD 'Auflagerreaktionen'
+
+STO#FR #FR+0.5                                                          $ [-]  Seitenummer
+
+#INCLUDE FORMAT
+
+VIEW TYPE DIRE X -1 Y 0 Z 0 AXIS NEGZ ROTA 0                            $ [-] Ansicht
+SCHH H6 #H6
+
+GRP 1,2,3,5                                                             $ [-] Gruppen
+
+$ Fenster Nr.1:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'max. Auflagerreaktionen'
+
+LC   NO #LCS+1
+AND  POSI 1 POSL 0 POSR 100 POSD 50 POSU 100                            $ [-] Lage des Fensters
+
+NODE TYPE SZ UNIT 50.0 SCHH YES REPR DVEC
+
+$ Fenster Nr.2:
+
+MOVE X     Y     Z    UNIT=PR A=0 SCHH=#SH SET=PEND DTYP=TEXT PICT=0
+     10.0  90.0  0.0
+TEXT 'min. Auflagerreaktionen'
+
+LC   NO #LCS+11
+AND  POSI 2 POSL 0 POSR 100 POSD 0 POSU 50                              $ [-] Lage des Fensters
+
+NODE TYPE SZ UNIT 50.0 SCHH YES REPR DVEC
+
+END
+

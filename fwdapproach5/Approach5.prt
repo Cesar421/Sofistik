@@ -1,0 +1,675 @@
+   *** Start: Programm Calculation - Version 2024-10.0.1119
+   *** Start: Programm aqua
+   
+   SOFiSTiK 2024-10.0.1119    AQUA   - GENERAL SECTIONS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    38. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   +++++ Warnung Nr. 12290 in Programm SOF_INP_CODE ; Eingabezeile:   17
+   Es existiert keine solche INI-Datei, es wird DIN_EN199X-200X-BRIDGE CAT:D verwendet
+   +++++ Warnung Nr. 12155 ; Eingabezeile:   22
+   Das Kennwort SCM @STEE ist eine veraltete Eingabemöglichkeit. Bitte beachten Sie, dass
+   zukünftige SOFiSTiK Major Releases diese Option nicht mehr unterstützen werden.
+   Bitte lesen Sie im Handbuch über alternative Eingabemöglichkeiten.
+   Bitte achten Sie auch darauf, dass das obsolete Kennwort an einer anderen Position stehen kann
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:05
+   
+   
+   
+    +++++    0 FEHLER UND    2 WARNUNGEN +++++
+   *** Stop : Programm aqua
+   *** Start: Programm aqua
+   
+   SOFiSTiK 2024-10.0.1119    AQUA   - GENERAL SECTIONS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    39. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   +++++ Warnung Nr.   935
+   Der Satz TUBE ist eine veraltete Eingabemöglichkeit. Bitte beachten Sie, dass diese mit
+   dem nächsten SOFiSTiK Major Release nicht mehr unterstützt werden wird.
+   Bitte benutzen Sie statt dessen den Satz PROF.
+   +++++ Warnung Nr.   209 in Programm SOF_INP_PROF
+   Querschnitt  11: Veralteten Profiltyp gefunden, wird durch den gültigen ersetzt: SH   => RHS.
+   Bitte beachten Sie, dass zukünftige SOFiSTiK Major Releases den veralteten Typ
+   nicht mehr unterstützen werden. Bitte verwenden Sie den gültigen Typ.
+   RECHENZEIT          3, TOTAL         3
+   DATUM      2025-10-22, 10:59:08
+   
+   
+   
+    +++++    0 FEHLER UND    2 WARNUNGEN +++++
+   *** Stop : Programm aqua
+   *** Start: Programm sofimshc
+   
+   SOFiSTiK 2024-10.0.1119    SOFIMSHC - GEOMETRY + STRUCT
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    40. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   Analyse und Zerlegung des Strukturmodells:
+   CPU-time [s]:    0.00,   geom. tolerance [m]:   0.005
+   RECHENZEIT          2, TOTAL         2
+   DATUM      2025-10-22, 10:59:11
+   *** Stop : Programm sofimshc
+   *** Start: Programm ase
+   
+   SOFiSTiK 2024-10.0.1119    ASE   - ADVANCED SOLUTION ENGINE
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    41. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          2, TOTAL         2
+   RECHENZEIT          0, TOTAL         2
+   DATUM      2025-10-22, 10:59:14
+   *** Stop : Programm ase
+   *** Start: Programm sofiload
+   
+   SOFiSTiK 2024-10.0.1119    SOFILOAD - LOAD GENERATOR
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    42. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          2, TOTAL         2
+   RECHENZEIT          0, TOTAL         2
+   DATUM      2025-10-22, 10:59:17
+   *** Stop : Programm sofiload
+   *** Start: Programm sofiload
+   
+   SOFiSTiK 2024-10.0.1119    SOFILOAD - LOAD GENERATOR
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    43. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          3, TOTAL         3
+   RECHENZEIT          0, TOTAL         3
+   DATUM      2025-10-22, 10:59:20
+   *** Stop : Programm sofiload
+   *** Start: Programm csm
+   
+   SOFiSTiK 2024-10.0.1119    CSM - CONSTRUCTION STAGE MANAGER
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    44. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   +++++ Warnung Nr.   132 in Programm CSM_PRUEF
+    Gruppe Nr. 12 enthält Elemente und wird ohne Eingabe nicht aktiviert.
+   RECHENZEIT          2, TOTAL         2
+   RECHENZEIT          0, TOTAL         2
+   DATUM      2025-10-22, 10:59:23
+   
+   
+   
+    +++++    0 FEHLER UND    1 WARNUNGEN +++++
+   *** Stop : Programm csm
+   *** Start: Programm ase
+   
+   SOFiSTiK 2024-10.0.1119    ASE   - ADVANCED SOLUTION ENGINE
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    45. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   Lastfall  4100
+   
+   Parameter des Gleichungssystems   3
+   (Sparse Direct Solver)
+   Anzahl Gleichungen             1534
+   Profil                         4606
+   Profil nach fill in            6644
+   RECHENZEIT          3, TOTAL         3
+   Lastfall  4200
+   
+   Parameter des Gleichungssystems   3
+   (Sparse Direct Solver)
+   Anzahl Gleichungen             1534
+   Profil                         4606
+   Profil nach fill in            6644
+   RECHENZEIT          0, TOTAL         3
+   RECHENZEIT          0, TOTAL         3
+   DATUM      2025-10-22, 10:59:26
+   *** Stop : Programm ase
+   *** Start: Programm aqb :  Check print stresses in construction stages
+   
+   SOFiSTiK 2024-10.0.1119    AQB     - DESIGN OF SECTIONS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    46. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   Arbeitsbereich          38.1 Megabyte
+   RECHENZEIT          3, TOTAL         3
+   RECHENZEIT          0, TOTAL         3
+   DATUM      2025-10-22, 10:59:32
+   *** Stop : Programm aqb
+   *** Start: Programm results
+   
+   SOFiSTiK 2024-10.0.1119    Result Viewer - SOFiSTiK Graphic
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    47. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:33
+   *** Stop : Programm results
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    47. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:35
+   *** Stop : Programm template
+   *** Start: Programm sofiload
+   
+   SOFiSTiK 2024-10.0.1119    SOFILOAD - LOAD GENERATOR
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    48. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          2, TOTAL         2
+   RECHENZEIT          0, TOTAL         2
+   DATUM      2025-10-22, 10:59:37
+   *** Stop : Programm sofiload
+   *** Start: Programm sofiload
+   
+   SOFiSTiK 2024-10.0.1119    SOFILOAD - LOAD GENERATOR
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    49. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          2, TOTAL         2
+   RECHENZEIT          0, TOTAL         2
+   DATUM      2025-10-22, 10:59:40
+   *** Stop : Programm sofiload
+   *** Start: Programm ase
+   
+   SOFiSTiK 2024-10.0.1119    ASE   - ADVANCED SOLUTION ENGINE
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    50. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   Lastfall   301
+   
+   Parameter des Gleichungssystems   3
+   (Sparse Direct Solver)
+   Anzahl Gleichungen             1534
+   Profil                         4606
+   Profil nach fill in            6644
+   RECHENZEIT          3, TOTAL         3
+   RECHENZEIT          0, TOTAL         3
+   DATUM      2025-10-22, 10:59:43
+   *** Stop : Programm ase
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    51. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:43
+   *** Stop : Programm template
+   *** Start: Programm maxima
+   
+   SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    52. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          3, TOTAL         3
+   RECHENZEIT          0, TOTAL         3
+   DATUM      2025-10-22, 10:59:47
+   *** Stop : Programm maxima
+   *** Start: Programm aqb
+   
+   SOFiSTiK 2024-10.0.1119    AQB     - DESIGN OF SECTIONS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    53. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   Arbeitsbereich          38.1 Megabyte
+   RECHENZEIT          4, TOTAL         4
+   RECHENZEIT          0, TOTAL         4
+   DATUM      2025-10-22, 10:59:53
+   *** Stop : Programm aqb
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    54. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:53
+   *** Stop : Programm template
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Ausnutzungsgrad σ-v Vergleichsspannung  BF:   8018
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 10:59:55
+   *** Stop : Programm wing
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    55. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:55
+   *** Stop : Programm template
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    56. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:55
+   *** Stop : Programm template
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    57. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 10:59:56
+   *** Stop : Programm template
+   *** Start: Programm maxima
+   
+   SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    58. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          2, TOTAL         2
+   RECHENZEIT          0, TOTAL         2
+   DATUM      2025-10-22, 10:59:58
+   *** Stop : Programm maxima
+   *** Start: Programm aqb
+   
+   SOFiSTiK 2024-10.0.1119    AQB     - DESIGN OF SECTIONS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    59. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   Arbeitsbereich          38.1 Megabyte
+   RECHENZEIT          3, TOTAL         3
+   RECHENZEIT          0, TOTAL         3
+   DATUM      2025-10-22, 11:00:04
+   *** Stop : Programm aqb
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    60. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:05
+   *** Stop : Programm template
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Schwingbreite Normalspannung  BF:   8118  Punkt:P__7
+   +++++ Warnung Nr.   807 in Programm gr3_l_mach
+          BEAM TYPE SWPT STYP BEAM Bemessungsfall 8118 unzulässig : Keine Werte gefunden
+          1       2     1 : Stabelemente , Schwingbreite Normalspannung  BF:   8118  Punkt:P__3
+   +++++ Warnung Nr.   807 in Programm gr3_l_mach
+          BEAM TYPE SWPT STYP BEAM Bemessungsfall 8118 unzulässig : Keine Werte gefunden
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:06
+   
+   
+   
+    +++++    0 FEHLER UND    2 WARNUNGEN +++++
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Schwingbreite Normalspannung  BF:   8118  Punkt:P__1
+   +++++ Warnung Nr.   807 in Programm gr3_l_mach
+          BEAM TYPE SWPT STYP BEAM Bemessungsfall 8118 unzulässig : Keine Werte gefunden
+          1       2     1 : Stabelemente , Schwingbreite Normalspannung  BF:   8118  Punkt:P__7
+   +++++ Warnung Nr.   807 in Programm gr3_l_mach
+          BEAM TYPE SWPT STYP BEAM Bemessungsfall 8118 unzulässig : Keine Werte gefunden
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:06
+   
+   
+   
+    +++++    0 FEHLER UND    2 WARNUNGEN +++++
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Schubspannung  BF:   8102  Punkt:P__4
+   +++++ Warnung Nr.   807 in Programm gr3_l_mach
+          BEAM TYPE STPT STYP BEAM Bemessungsfall 8102 unzulässig : Keine Werte gefunden
+          1       2     1 : Stabelemente , Schubspannung  BF:   8112  Punkt:P__4
+   +++++ Warnung Nr.   807 in Programm gr3_l_mach
+          BEAM TYPE STPT STYP BEAM Bemessungsfall 8112 unzulässig : Keine Werte gefunden
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:07
+   
+   
+   
+    +++++    0 FEHLER UND    2 WARNUNGEN +++++
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Schwingbreite Normalspannung  BF:   8118 Punkt:  Maximalwert aus allen
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:07
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Schubspannung  BF:   8102  Punkt:U03
+          1       2     1 : Stabelemente , Schubspannung  BF:   8112  Punkt:U03
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:08
+   *** Stop : Programm wing
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    61. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:08
+   *** Stop : Programm template
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    62. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:09
+   *** Stop : Programm template
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    63. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:09
+   *** Stop : Programm template
+   *** Start: Programm maxima
+   
+   SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    64. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          3, TOTAL         3
+   RECHENZEIT          0, TOTAL         3
+   DATUM      2025-10-22, 11:00:12
+   *** Stop : Programm maxima
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    65. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:12
+   *** Stop : Programm template
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Knotenverschiebung in global X  LF:       2201
+          1       2     1 : Knotenverschiebung in global X  LF:       2211
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:13
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Knotenverschiebung in global Z  LF:       2203
+          1       2     1 : Knotenverschiebung in global Z  LF:       2213
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:13
+   *** Stop : Programm wing
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    66. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:14
+   *** Stop : Programm template
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    67. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:14
+   *** Stop : Programm template
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    68. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:14
+   *** Stop : Programm template
+   *** Start: Programm maxima
+   
+   SOFiSTiK 2024-10.0.1119    MAXIMA - Superposition
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    69. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          2, TOTAL         2
+   RECHENZEIT          0, TOTAL         2
+   DATUM      2025-10-22, 11:00:17
+   *** Stop : Programm maxima
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    70. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:17
+   *** Stop : Programm template
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Knoten , Auflagerkraft in global Z  LF:       2301
+          1       2     1 : Knoten , Auflagerkraft in global Z  LF:       2311
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:18
+   *** Stop : Programm wing
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    71. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:19
+   *** Stop : Programm template
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    72. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:19
+   *** Stop : Programm template
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:20
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Normalkraft Nx  LF:       8001
+          1       2     1 : Stabelemente , Normalkraft Nx  LF:       8011
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:20
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Querkraft Vz  LF:       8002
+          1       2     1 : Stabelemente , Querkraft Vz  LF:       8012
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:21
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Querkraft Vy  LF:       8003
+          1       2     1 : Stabelemente , Querkraft Vy  LF:       8013
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:21
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Biegemoment My  LF:       8004
+          1       2     1 : Stabelemente , Biegemoment My  LF:       8014
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:22
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Biegemoment Mz  LF:       8005
+          1       2     1 : Stabelemente , Biegemoment Mz  LF:       8015
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:22
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Stabelemente , Torsionsmoment Mt  LF:       8006
+          1       2     1 : Stabelemente , Torsionsmoment Mt  LF:       8016
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:23
+   *** Stop : Programm wing
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    73. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:23
+   *** Stop : Programm template
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Alle Lasten  LF:       5100
+          1       2     1 : Alle Lasten  LF:       5200
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:24
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Alle Lasten  LF:        301
+          1       2     1 : Alle Lasten  LF:        302
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:24
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Alle Lasten  LF:        303
+          1       2     1 : Alle Lasten  LF:        304
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:25
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Alle Lasten  LF:        305
+          1       2     1 : Alle Lasten  LF:        306
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:25
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Alle Lasten  LF:        307
+          1       2     1 : Alle Lasten  LF:        308
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:26
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Alle Lasten  LF:        401
+          1       2     1 : Alle Lasten  LF:        402
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:27
+   *** Stop : Programm wing
+   *** Start: Programm template
+   
+   SOFiSTiK 2024-10.0.1119    TEMPLATE * GENERAL REMARKS
+   Ausgabe auf Datei Approach5.plb
+   Projektdatenbasis Approach5.cdb        -    74. Zugriff
+   Projekt: Torsionsbalken km 7,7+64
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:27
+   *** Stop : Programm template
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Randbettung in Randrichtung
+          1       2     1 : Randbettung in Randrichtung
+   RECHENZEIT          1, TOTAL         1
+   DATUM      2025-10-22, 11:00:28
+   *** Stop : Programm wing
+   *** Start: Programm wing
+   
+   SOFiSTiK 2024-10.0.1119    WinGraf - Graphical Output
+   Ausgabe auf Datei Approach5.plb
+   graphics picture layer : title
+          1       1     1 : Nicht ständige translatorische Einzelmassen in global X
+          1       1     2 : Nicht ständige translatorische Einzelmassen in global Y
+          1       1     3 : Nicht ständige translatorische Einzelmassen in global Z
+   RECHENZEIT          0, TOTAL         0
+   DATUM      2025-10-22, 11:00:28
+   *** Stop : Programm wing
+   *** Ende der Berechnung!
